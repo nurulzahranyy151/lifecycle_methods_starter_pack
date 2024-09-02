@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import ListMovie from './ListMovie.jsx'
-import './App.css'
-import Modal from './Components/Modal/Modal'
+import { useState } from 'react';
+import ListMovie from './ListMovie.jsx';
+import './App.css';
+import Modal from './Modal/Modal';
 
 function App() {
-  const [search, setSearch] = useState('')
-  const [showListMovie, setShowListMovie] = useState(true)
+  const [search, setSearch] = useState('');
+  const [showListMovie, setShowListMovie] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const onChangeText = (e) => {
-    setText(e.target.value)
+    setSearch(e.target.value);
   }
-  const onClickSearch = () => {
-    setSearch(text)
+
+  const toggleModal = (state) => {
+    setIsModalOpen(state);
   }
 
   return (
@@ -22,13 +25,13 @@ function App() {
           <input onChange={onChangeText} type="text" />
         </label>
       </div>
-        <button className="btn-show" onClick={() => setShowListMovie(!showListMovie)}> Show List Movie
-        </button>
-      {showListMovie && <ListMovie search={search}/>}
-      
-    
+      <button className="btn-show" onClick={() => setShowListMovie(!showListMovie)}>
+        Show List Movie
+      </button>
+      {showListMovie && <ListMovie search={search} toggleModal={toggleModal} />}
+      {isModalOpen && <Modal toggleModal={toggleModal} />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
