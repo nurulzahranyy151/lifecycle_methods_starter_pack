@@ -19,9 +19,9 @@ export default class ListMovie extends React.Component {
         this.fetchMovies();
         return;
       }
-      if (this.props.search.trim() === '') { // Check for empty string
+      if (this.props.search.trim() === '') { 
         this.setState({ movies: [], noMoviesFound: false });
-        this.props.toggleModal(false); // Hide the modal
+        this.props.toggleModal(false);
         return;
       }
       this.setState({ loading: true });
@@ -29,10 +29,10 @@ export default class ListMovie extends React.Component {
         this.setState({ loading: false });
         if (response.data.results.length === 0) {
           this.setState({ movies: [], noMoviesFound: true });
-          this.props.toggleModal(true); // Show the modal
+          this.props.toggleModal(true); 
         } else {
           this.setState({ movies: response.data.results, noMoviesFound: false });
-          this.props.toggleModal(false); // Hide the modal
+          this.props.toggleModal(false);
         }
       }).catch(error => {
         console.error(error);
@@ -46,7 +46,7 @@ export default class ListMovie extends React.Component {
     axios.get('https://api.themoviedb.org/3/movie/popular?api_key=d64465f835d027114fd469afd4e2de72').then(response => {
       this.setState({ loading: false });
       this.setState({ movies: response.data.results, noMoviesFound: false });
-      this.props.toggleModal(false); // Hide the modal if it was shown
+      this.props.toggleModal(false); 
     }).catch(error => {
       console.error(error);
       this.setState({ loading: false });
